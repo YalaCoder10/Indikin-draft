@@ -1,0 +1,13 @@
+Month,Scenario Target (Lean/Base/Aggressive),Budgeted Burn (USD),Actual Burn (USD),Variance (USD),Variance (%),Active Filmmakers (AI Users),AI Outputs (Total),Cost per Active Filmmaker (USD),Cost per AI Output (USD),Subtitle Hours Processed,LLM Tokens (Millions),Model/API Spend (USD),Infra Spend (USD),People Spend (USD),QA & Safety Spend (USD),Tooling/Ops Spend (USD),Contingency Used (USD),Feature Adoption - Subtitles (% of active users),Feature Adoption - Script Coverage (%),Feature Adoption - EPK Builder (%),Feature Adoption - ONBA (%),Feature Adoption - ANALYXA (%),Feature Adoption - MODRA (%),Avg Latency (sec),AI Failure Rate (%),Moderation Incident Rate (%),Rollback Count,Runway Impact (months),Notes/Actions
+2026-04,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-05,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-06,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-07,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-08,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-09,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-10,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-11,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2026-12,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2027-01,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2027-02,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2027-03,Base,52287.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,

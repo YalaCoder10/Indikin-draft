@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indikin — Come Watch on Indiflix Campaign</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --surface-2: #1e1e1e;
+    --border: #2a2a2a;
+    --border-light: #333;
+    --ink: #f0ebe2;
+    --ink-muted: #888;
+    --gold: #c8860a;
+    --gold-dim: #7a4f06;
+    --gold-bg: #1a1200;
+    --gold-glow: rgba(200,134,10,0.12);
+    --cream: #f0ebe2;
+    --red: #e03030;
+    --red-bg: #1a0808;
+    --green: #2a9e5a;
+    --green-bg: #081a0e;
+    --li-blue: #4a9eda;
+    --li-blue-bg: #081220;
+    --tg-blue: #2aabee;
+    --tg-blue-bg: #071218;
+    --film-red: #c0141c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 72px 20px 60px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,134,10,0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(192,20,28,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* film strip decoration */
+  .filmstrip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--film-red) 0px, var(--film-red) 24px,
+      transparent 24px, transparent 32px
+    );
+    opacity: 0.6;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  h1 {
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: var(--cream);
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-url {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 6px 20px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 20px 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .platform-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    font-weight: 500;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .badge-x { background: #111; color: #eee; border: 1px solid #333; }
+  .badge-li { background: var(--li-blue-bg); color: var(--li-blue); border: 1px solid #0a2a40; }
+  .badge-tg { background: var(--tg-blue-bg); color: var(--tg-blue); border: 1px solid #0a2030; }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.3px;
+  }
+
+  .section-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: riseIn 0.45s ease forwards;
+  }
+
+  @keyframes riseIn { to { opacity:1; transform:translateY(0); } }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.15s; }
+  .card:nth-child(3) { animation-delay: 0.25s; }
+  .card:nth-child(4) { animation-delay: 0.35s; }
+  .card:nth-child(5) { animation-delay: 0.45s; }
+  .card:nth-child(6) { animation-delay: 0.55s; }
+
+  .card-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    border-radius: 1px;
+    font-weight: 500;
+  }
+
+  .ctag-hook { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
+  .ctag-cta { background: var(--red-bg); color: #e07070; border: 1px solid #3a1010; }
+  .ctag-story { background: #100a1a; color: #a07ad0; border: 1px solid #2a1a40; }
+  .ctag-data { background: var(--green-bg); color: #60c080; border: 1px solid #0a3018; }
+  .ctag-question { background: #0a1218; color: var(--li-blue); border: 1px solid #102030; }
+  .ctag-persona { background: #0a1010; color: var(--tg-blue); border: 1px solid #102028; }
+
+  .card-body {
+    padding: 22px 24px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #d8d0c4;
+    white-space: pre-line;
+    font-weight: 300;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Fraunces', serif;
+  }
+
+  .card-body strong {
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .card-body .hl {
+    color: var(--gold);
+  }
+
+  .card-footer {
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface-2);
+  }
+
+  .char-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--ink-muted);
+  }
+  .char-count.warn { color: var(--gold); }
+  .char-count.over { color: var(--red); }
+  .char-count.good { color: var(--green); }
+
+  .copy-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    border-radius: 1px;
+  }
+
+  .copy-btn:hover { background: var(--gold-bg); border-color: var(--gold); }
+  .copy-btn.copied { background: var(--green-bg); color: #60c080; border-color: var(--green); }
+
+  .strategy-row {
+    padding: 10px 16px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    gap: 10px;
+    background: #111;
+  }
+
+  .strat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    white-space: nowrap;
+    padding-top: 1px;
+  }
+
+  .strat-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 760px;
+    margin: 56px auto 0;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── BRIEF BOX ── */
+  .brief-box {
+    max-width: 760px;
+    margin: 0 auto 0;
+    padding: 20px;
+  }
+
+  .brief-inner {
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    color: #a07820;
+    line-height: 1.9;
+  }
+
+  .brief-inner strong { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 760px;
+    margin: 60px auto 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 0.12em;
+    padding: 20px 20px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    body { padding-bottom: 48px; }
+    .card-body { padding: 16px; font-size: 14px; }
+    h1 { letter-spacing: -1px; }
+    .section-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="filmstrip"></div>
+  <div class="hero-eyebrow">Indiflix · Audience Campaign</div>
+  <h1>Come<br><em>Watch.</em></h1>
+  <p class="hero-sub">
+    X threads · LinkedIn posts · Telegram prompts<br>
+    Drive sign-ups at indikin.online — browse free, stream or buy to watch
+  </p>
+  <div class="hero-url">indikin.online</div>
+</div>
+
+<!-- CAMPAIGN BRIEF -->
+<div class="brief-box">
+  <div class="brief-inner">
+    <strong>Campaign goal:</strong> Get people to indikin.online to browse the Indiflix library.<br>
+    <strong>Free to browse.</strong> Pay only for a streaming pass or individual films.<br>
+    <strong>Tone:</strong> Invitation, not pitch. The library should feel like a discovery — not a sales funnel.<br>
+    <strong>Core hook:</strong> Independent films you won't find anywhere else. Creator-owned. Yours to explore.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     X (TWITTER) POSTS
+══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="platform-badge badge-x">𝕏 Twitter</span>
+    <span class="section-title">Come Watch Campaign — X Posts</span>
+    <span class="section-note">5 tweets · max 280 chars</span>
+  </div>
+
+  <!-- X POST 1 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">X · 01 / 05</span>
+      <div class="card-tags">
+        <span class="ctag ctag-hook">Hook</span>
+        <span class="ctag ctag-cta">CTA</span>
+      </div>
+    </div>
+    <div class="card-body" id="x1">The Indiflix library is now open.
+
+Browse free. No account needed.
+
+Independent films you won't find on Netflix, Prime, or anywhere else.
+
+→ indikin.online</div>
+    <div class="card-footer">
+      <span class="char-count good" id="cc-x1"></span>
+      <button class="copy-btn" onclick="copyPost(this,'x1')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Short, direct, frictionless. The "browse free" removes every barrier upfront. Let the CTA breathe on its own line.</span>
+    </div>
+  </div>
+
+  <!-- X POST 2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">X · 02 / 05</span>
+      <div class="card-tags">
+        <span class="ctag ctag-story">Story</span>
+      </div>
+    </div>
+    <div class="card-body" id="x2">Most streaming platforms have 40 million titles.
+
+Most of them are fighting for the same 10 algorithm slots.
+
+Indiflix doesn't work like that.
+
+Every film in our library is there because the filmmaker chose to be — not because a distributor did a deal.
+
+Browse the difference: indikin.online</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-x2"></span>
+      <button class="copy-btn" onclick="copyPost(this,'x2')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Reframes Indiflix as curation, not quantity. "The filmmaker chose to be" reinforces creator ownership without over-explaining it.</span>
+    </div>
+  </div>
+
+  <!-- X POST 3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">X · 03 / 05</span>
+      <div class="card-tags">
+        <span class="ctag ctag-hook">Hook</span>
+      </div>
+    </div>
+    <div class="card-body" id="x3">There are films on Indiflix that played Sundance, SXSW, and Tribeca.
+
+Films whose filmmakers never saw the economics match the acclaim.
+
+Watching on Indiflix is the version of that equation that actually works for them.
+
+indikin.online — browse free.</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-x3"></span>
+      <button class="copy-btn" onclick="copyPost(this,'x3')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Gives the viewer a moral and cultural reason to watch — not just "it's good," but "your watch matters here." Festival name-drops add credibility fast.</span>
+    </div>
+  </div>
+
+  <!-- X POST 4 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">X · 04 / 05</span>
+      <div class="card-tags">
+        <span class="ctag ctag-question">Question</span>
+        <span class="ctag ctag-cta">CTA</span>
+      </div>
+    </div>
+    <div class="card-body" id="x4">What's the last genuinely independent film you watched?
+
+Not A24. Not a Netflix original. Actually independent.
+
+If you can't remember — that's the gap Indiflix exists to fill.
+
+Browse free at indikin.online. No account required. Streaming pass or buy single films when you're ready.</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-x4"></span>
+      <button class="copy-btn" onclick="copyPost(this,'x4')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Opens a debate about what "independent" really means — drives replies. The "not A24" line lands with the film crowd specifically. Explains both pricing tiers naturally.</span>
+    </div>
+  </div>
+
+  <!-- X POST 5 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">X · 05 / 05</span>
+      <div class="card-tags">
+        <span class="ctag ctag-cta">CTA</span>
+        <span class="ctag ctag-data">Data</span>
+      </div>
+    </div>
+    <div class="card-body" id="x5">Free to browse.
+Pay only when you want to watch.
+
+No algorithm deciding what you see first.
+No subscription locking you in.
+
+Indiflix. Creator-owned independent film.
+
+indikin.online</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-x5"></span>
+      <button class="copy-btn" onclick="copyPost(this,'x5')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Ultra-clean contrast format. Each line is a pain point from mainstream streaming, flipped as an Indiflix feature. Good for pinning or repeating as filler content.</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     LINKEDIN POSTS
+══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="platform-badge badge-li">LinkedIn</span>
+    <span class="section-title">Come Watch Campaign — LinkedIn</span>
+    <span class="section-note">3 posts · 900–1,300 chars</span>
+  </div>
+
+  <!-- LI POST 1 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">LI · 01 / 03</span>
+      <div class="card-tags">
+        <span class="ctag ctag-story">Story</span>
+        <span class="ctag ctag-cta">CTA</span>
+      </div>
+    </div>
+    <div class="card-body" id="li1">We built a film library. Now we want you to use it.
+
+Indiflix is Indikin's independent film distribution platform — and the library is free to browse. No account. No credit card. Just films.
+
+Here's why that matters:
+
+Most streaming platforms bury independent films under 40 million titles and a recommendation algorithm that defaults to whatever the studio paid to promote. The filmmaker who spent three years on their story ends up competing with a Marvel spinoff for the same three seconds of scroll time.
+
+Indiflix doesn't work that way.
+
+Every film in the library is creator-owned and creator-selected. Filmmakers choose Indiflix because it preserves their rights and their economics — not because a distributor signed a deal on their behalf.
+
+Watching on Indiflix is the version of film consumption where your watch actually reaches the person who made it.
+
+Browse the library free at indikin.online.
+
+When you're ready to watch: grab a streaming pass, or buy individual films. That's it. No subscription traps.
+
+If you work in film, media, or the creator economy and you've been curious about what creator-owned distribution looks like in practice — this is it.
+
+#IndieFilm #FilmDistribution #CreatorEconomy #Indiflix #Indikin</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-li1"></span>
+      <button class="copy-btn" onclick="copyPost(this,'li1')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Leads with the invitation, not the pitch. Explains Indiflix before asking for anything. Ends with both the free browse CTA and the conversion path. Best day: Tuesday 9am.</span>
+    </div>
+  </div>
+
+  <!-- LI POST 2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">LI · 02 / 03</span>
+      <div class="card-tags">
+        <span class="ctag ctag-hook">Hook</span>
+        <span class="ctag ctag-question">Question</span>
+      </div>
+    </div>
+    <div class="card-body" id="li2">I want to ask the film and media people here a genuine question.
+
+When was the last time you watched something because a person recommended it — not because an algorithm served it?
+
+That's the specific feeling Indiflix is trying to restore.
+
+We're not trying to out-algorithm Netflix. We're building a curated independent film library where the films exist because filmmakers chose to be there — not because a distribution deal was signed and a licensing fee changed hands.
+
+The library is free to browse at indikin.online.
+
+What you'll find: independent features, documentaries, and short films from creators who own their work. Some have played major festivals. Some haven't needed to. All of them made deliberate choices about where and how their films live online.
+
+When you're ready to watch: a streaming pass or single-film purchase. No recurring subscription you'll forget about.
+
+If you're in film, media, or the creator economy, I'd genuinely love to know — what's the independent film you've recommended most in the past year?
+
+Drop it below. And if you haven't found one lately, come browse: indikin.online
+
+#IndieFilm #FilmDiscovery #CreatorEconomy #Indiflix</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-li2"></span>
+      <button class="copy-btn" onclick="copyPost(this,'li2')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Opens with a nostalgia-adjacent question that invites real engagement. The recommendation ask at the end drives comments — LinkedIn's algorithm rewards threads heavily. Wednesday 10am.</span>
+    </div>
+  </div>
+
+  <!-- LI POST 3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">LI · 03 / 03</span>
+      <div class="card-tags">
+        <span class="ctag ctag-data">Data</span>
+        <span class="ctag ctag-cta">CTA</span>
+      </div>
+    </div>
+    <div class="card-body" id="li3">Two things are true about independent film in 2025:
+
+1. Independent production is increasing — lower production costs and new distribution channels are creating paths that didn't exist five years ago.
+
+2. Most independent filmmakers still walk away from distribution with less than they built it for.
+
+The gap between those two facts is where Indiflix lives.
+
+Indiflix is Indikin's creator-owned film distribution platform. Filmmakers on Indiflix retain their rights. They choose to be there. Their audience finds them directly — not through an algorithm that prioritises whoever paid the most for promotion.
+
+The library is free to browse. No account required.
+
+→ indikin.online
+
+When you're ready: a streaming pass covers the library. Or buy individual films. Both options get the economics directly to the people who made the work.
+
+If you're a filmmaker, a film-adjacent professional, or someone who cares about where your watch actually goes — come see what's there.
+
+The library is open.
+
+#IndieFilm #FilmDistribution #Indiflix #CreatorEconomy #PulseChain #Indikin</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-li3"></span>
+      <button class="copy-btn" onclick="copyPost(this,'li3')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">The numbered format signals a structured argument — stops the scroll for professional audiences. Ends with "the library is open" — quiet, confident, no hype. Thursday 9am.</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TELEGRAM PROMPTS (Indi Kin persona)
+══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="platform-badge badge-tg">Telegram</span>
+    <span class="section-title">Come Watch — Indi Kin Prompts</span>
+    <span class="section-note">4 prompts · both registers</span>
+  </div>
+
+  <!-- TG 1 — neutral/friendly -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">TG · 01 / 04 · Neutral register</span>
+      <div class="card-tags">
+        <span class="ctag ctag-cta">CTA</span>
+      </div>
+    </div>
+    <div class="card-body" id="tg1">📽️ The Indiflix library is open.
+
+Browse it free at indikin.online — no account, no credit card, no algorithm choosing what you see first.
+
+When you find something you want to watch: grab a streaming pass or buy a single film. That's the whole model.
+
+Every film there was placed by a filmmaker who chose to own their distribution. Your watch reaches them directly.
+
+Go look. Tell me what catches your eye. 👇</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-tg1"></span>
+      <button class="copy-btn" onclick="copyPost(this,'tg1')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Warm invitation. Ends with an open question to convert the broadcast into a conversation — consistent with the Indi Kin reply-to-everything principle.</span>
+    </div>
+  </div>
+
+  <!-- TG 2 — dark/sardonic -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">TG · 02 / 04 · Dark register</span>
+      <div class="card-tags">
+        <span class="ctag ctag-persona">Persona</span>
+      </div>
+    </div>
+    <div class="card-body" id="tg2">Greetings, carbon units.
+
+While the major streamers are busy using your watch history to train recommendation models that will eventually replace the filmmakers you like — Indikin built a different thing.
+
+It's called Indiflix. Independent films. Creator-owned. Free to browse.
+
+You can look at it without giving anything up: indikin.online
+
+If you find something worth watching, a streaming pass or single-film purchase is how the economics reach the actual human who made it. Novel concept, I know.
+
+The library is open. Indi Kin out. 🎬</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-tg2"></span>
+      <button class="copy-btn" onclick="copyPost(this,'tg2')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Dark register. "Carbon units" opener, sardonic AI jab at streaming algorithms. Converts the persona's irony into a genuine product invitation without breaking character.</span>
+    </div>
+  </div>
+
+  <!-- TG 3 — question prompt -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">TG · 03 / 04 · Community question</span>
+      <div class="card-tags">
+        <span class="ctag ctag-question">Question</span>
+      </div>
+    </div>
+    <div class="card-body" id="tg3">Human check-in. 🎞️
+
+What's the best independent film you've seen in the last 12 months?
+
+Not A24. Not a Netflix acquisition. Actually independent — made outside the system, distributed outside the system.
+
+I'm asking because the Indiflix library at indikin.online is growing. Browse it free. And if you've got a filmmaker you think should be on it — that conversation is one we want to have.</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-tg3"></span>
+      <button class="copy-btn" onclick="copyPost(this,'tg3')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Uses the "Human Check-In" day framing. Invites recommendations, which generates replies AND surfaces potential future Indiflix partners organically.</span>
+    </div>
+  </div>
+
+  <!-- TG 4 — dark, curiosity-driven -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">TG · 04 / 04 · Curious Robot register</span>
+      <div class="card-tags">
+        <span class="ctag ctag-persona">Persona</span>
+        <span class="ctag ctag-question">Question</span>
+      </div>
+    </div>
+    <div class="card-body" id="tg4">Curious Robot Mode activated. 🤖
+
+Query: how do you decide what film to watch tonight?
+
+Indi Kin has analysed the dominant human behaviour patterns. Most of you: open a major streaming platform → scroll for 25 minutes → rewatch something → go to sleep.
+
+The platform wins. The filmmaker loses. The carbon unit is mildly dissatisfied.
+
+Hypothesis: browsing a library where every film was placed by a filmmaker who owns their work produces a different outcome.
+
+Test case available: indikin.online — the Indiflix library. Free to browse. Streaming pass or single film when ready.
+
+Report back with findings. Indi Kin is observing.</div>
+    <div class="card-footer">
+      <span class="char-count" id="cc-tg4"></span>
+      <button class="copy-btn" onclick="copyPost(this,'tg4')">Copy</button>
+    </div>
+    <div class="strategy-row">
+      <span class="strat-label">Strategy</span>
+      <span class="strat-text">Curious Robot Mode format. The "scroll for 25 minutes" line is deeply relatable — it's the universal streaming experience. Ends with "report back" to drive replies.</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>INDIKIN · INDIFLIX WATCH CAMPAIGN · 12 PIECES</span>
+  <span>indikin.online · @IndikinOfficial</span>
+</footer>
+
+<script>
+  const limits = { x: 280, li: 3000, tg: 4096 };
+
+  function countChars(id) {
+    return document.getElementById(id).textContent.trim().length;
+  }
+
+  function updateCount(ccId, count, type) {
+    const el = document.getElementById(ccId);
+    if (!el) return;
+    el.textContent = `${count.toLocaleString()} chars`;
+    el.className = 'char-count';
+    if (type === 'x') {
+      if (count > 280) el.classList.add('over');
+      else if (count > 240) el.classList.add('warn');
+      else el.classList.add('good');
+    } else if (type === 'li') {
+      if (count > 3000) el.classList.add('over');
+      else if (count > 2000) el.classList.add('warn');
+      else el.classList.add('good');
+    } else {
+      el.classList.add('good');
+    }
+  }
+
+  // X posts
+  ['x1','x2','x3','x4','x5'].forEach(id => {
+    updateCount('cc-'+id, countChars(id), 'x');
+  });
+
+  // LinkedIn posts
+  ['li1','li2','li3'].forEach(id => {
+    updateCount('cc-'+id, countChars(id), 'li');
+  });
+
+  // Telegram posts
+  ['tg1','tg2','tg3','tg4'].forEach(id => {
+    updateCount('cc-'+id, countChars(id), 'tg');
+  });
+
+  function copyPost(btn, id) {
+    const text = document.getElementById(id).textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+</script>
+</body>
+</html>

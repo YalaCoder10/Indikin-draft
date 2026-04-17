@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indikin — Active Accounts Playbook Vol. 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --green: #00e676;
+    --green-dim: #003a1a;
+    --amber: #ffb300;
+    --amber-dim: #3a2800;
+    --text: #e8e8e8;
+    --muted: #666;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 64px 56px 48px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: 'VOL.2';
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 180px;
+    color: #111;
+    letter-spacing: -4px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: 1px;
+    line-height: 0.92;
+    color: var(--white);
+  }
+
+  h1 span { color: var(--green); }
+
+  .header-sub {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .header-sub em { color: var(--amber); font-style: normal; }
+
+  /* ── ACTIVITY BADGE ── */
+  .activity-bar {
+    background: var(--green-dim);
+    border: 1px solid var(--green);
+    border-left: 4px solid var(--green);
+    padding: 14px 56px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 0.15em;
+  }
+
+  /* ── MAIN ── */
+  main { padding: 0 56px 80px; }
+
+  /* ── ACCOUNT BLOCK ── */
+  .account-block {
+    margin-top: 56px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .account-head {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 0;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .account-index {
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--bg);
+    writing-mode: vertical-lr;
+    letter-spacing: 2px;
+    padding: 20px 0;
+  }
+
+  .account-meta {
+    padding: 24px 28px;
+  }
+
+  .account-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .account-handle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+  }
+
+  .account-handle a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .account-handle a:hover { text-decoration: underline; }
+
+  .account-handle .pipe { color: var(--border); margin: 0 8px; }
+
+  .account-stats-col {
+    padding: 20px 28px;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    min-width: 160px;
+  }
+
+  .follower-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--amber);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .follower-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .activity-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.1em;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── ACCOUNT BODY ── */
+  .account-body {
+    padding: 28px;
+  }
+
+  .why-box {
+    background: var(--card);
+    border-left: 3px solid var(--amber);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.7;
+    color: #b0a890;
+  }
+
+  .why-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ── RESPONSE SCRIPTS ── */
+  .scripts-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .script-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .script-trigger {
+    background: #111;
+    padding: 10px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trigger-tag {
+    font-size: 8.5px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    white-space: nowrap;
+    padding-top: 1px;
+    min-width: 78px;
+  }
+
+  .script-text {
+    padding: 18px 20px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #d0cfc0;
+    white-space: pre-line;
+    font-weight: 300;
+  }
+
+  .script-footer {
+    padding: 8px 18px;
+    background: #0f0f0f;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+  }
+
+  .type-badge {
+    padding: 2px 9px;
+    font-size: 8.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .badge-reply { background: #003a1a; color: var(--green); border: 1px solid var(--green); }
+  .badge-quote { background: #1a1a3a; color: #7090ff; border: 1px solid #3050b0; }
+  .badge-thread { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber); }
+
+  /* ── STRATEGY NOTE ── */
+  .strategy-note {
+    margin-top: 20px;
+    padding: 14px 20px;
+    border: 1px dashed #2a2a2a;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .strategy-note strong {
+    color: var(--text);
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--amber);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 28px 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  footer .brand { color: var(--green); font-weight: 700; }
+
+  @media (max-width: 768px) {
+    .header { padding: 40px 24px 32px; }
+    .header::before { display: none; }
+    main { padding: 0 24px 60px; }
+    .account-head { grid-template-columns: 48px 1fr; }
+    .account-stats-col { display: none; }
+    .header-sub { gap: 16px; }
+    footer { flex-direction: column; gap: 8px; padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">@IndikinOfficial — Engagement Playbook</div>
+  <h1>HIGH-ACTIVITY<br>TARGET <span>ACCOUNTS</span></h1>
+  <div class="header-sub">
+    <div>Volume <em>02 of 02</em></div>
+    <div>Accounts <em>5 new targets</em></div>
+    <div>Selection criteria <em>verified post activity 2025</em></div>
+    <div>Combined reach <em>~600K+ followers</em></div>
+  </div>
+</header>
+
+<div class="activity-bar">
+  ● All five accounts verified as actively posting in 2025 — selected specifically for high reply volume and community engagement on posts
+</div>
+
+<main>
+
+  <!-- ══════════════════════════ ACCOUNT 1 ══════════════════════════ -->
+  <div class="account-block">
+    <div class="account-head">
+      <div class="account-index">01</div>
+      <div class="account-meta">
+        <div class="account-name">The Film Stage</div>
+        <div class="account-handle">
+          <a href="https://x.com/TheFilmStage" target="_blank">x.com/TheFilmStage</a>
+          <span class="pipe">|</span>
+          @TheFilmStage
+          <span class="pipe">|</span>
+          116K+ posts on record · Top 50 Films of 2025 posted Dec 2025
+        </div>
+      </div>
+      <div class="account-stats-col">
+        <div class="follower-count">~200K</div>
+        <div class="follower-label">Followers</div>
+        <div class="activity-indicator"><div class="dot"></div>VERY ACTIVE</div>
+      </div>
+    </div>
+    <div class="account-body">
+      <div class="why-box">
+        <span class="why-label">Why this account</span>
+        The Film Stage posts daily — film reviews, director interviews, festival coverage — and their posts reliably generate dozens of replies. Their audience is serious about cinema and includes both working film professionals and dedicated enthusiasts. They published their Top 50 Films of 2025 list in December, actively covered Sundance, and have a deeply engaged readership who argues and debates in every thread. This is a live conversation, not a broadcast feed.
+      </div>
+
+      <div class="scripts-header">
+        <span>Prepared Response Scripts — 3 scenarios</span>
+        <span>@TheFilmStage</span>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          A "best films of the year" list or festival picks
+        </div>
+        <div class="script-text">Every year this list sparks debate — and every year the real conversation is missing.
+
+How did these films get made? How were they funded? Who owned the rights once they hit festivals?
+
+The creative conversation and the business conversation rarely happen in the same room. @IndikinOfficial is trying to change that for the filmmakers behind lists like this.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Shifts conversation from curation to creator economics</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          A director interview / filmmaker profile
+        </div>
+        <div class="script-text">What strikes me most about interviews like this is how rarely the business side comes up — how the film was financed, who holds the rights, what the filmmaker actually earned.
+
+The creative story is always told. The economic story almost never is.
+
+@IndikinOfficial is building infrastructure so those two stories can finally be the same one.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Adds a layer to their editorial coverage · No hard sell</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Streaming / distribution news (Netflix, A24, indie releases)
+        </div>
+        <div class="script-text">The distribution conversation always ends here — which platform, which deal.
+
+It almost never asks: did the filmmaker own any of it?
+
+That's the question @IndikinOfficial and Indiflix are building toward: what does filmmaker-owned distribution infrastructure actually look like? The case for it is getting stronger every year.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-quote">Quote Post</span></div>
+          <div>Positions Indiflix as the answer to distribution dependency</div>
+        </div>
+      </div>
+
+      <div class="strategy-note">
+        <strong>Engagement Strategy</strong>
+        The Film Stage posts multiple times daily with very consistent article links and editorial takes. Their reply sections are active but rarely crowded — being in the first 5 replies on a post that gets traction is achievable. Prioritize posts about filmmaker economics, distribution, or festival business. Avoid replying to pure review posts unless the reply is genuinely about the craft.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ACCOUNT 2 ══════════════════════════ -->
+  <div class="account-block">
+    <div class="account-head">
+      <div class="account-index">02</div>
+      <div class="account-meta">
+        <div class="account-name">MovieMaker Magazine</div>
+        <div class="account-handle">
+          <a href="https://x.com/moviemakermag" target="_blank">x.com/moviemakermag</a>
+          <span class="pipe">|</span>
+          @moviemakermag
+          <span class="pipe">|</span>
+          10.9K posts · Art & business of filmmaking · LA
+        </div>
+      </div>
+      <div class="account-stats-col">
+        <div class="follower-count">158K</div>
+        <div class="follower-label">Followers</div>
+        <div class="activity-indicator"><div class="dot"></div>ACTIVE</div>
+      </div>
+    </div>
+    <div class="account-body">
+      <div class="why-box">
+        <span class="why-label">Why this account</span>
+        MovieMaker Magazine explicitly covers both the art AND the business of filmmaking — making it one of the most directly relevant accounts for Indikin's positioning. Their 158K followers include working directors, producers, and film students who are actively trying to navigate the industry. Their posts mix filmmaker interviews, festival news, and practical industry advice. They've referenced $INDIKIN's niche (indie financing, distribution) constantly in their editorial coverage. Perfect alignment.
+      </div>
+
+      <div class="scripts-header">
+        <span>Prepared Response Scripts — 3 scenarios</span>
+        <span>@moviemakermag</span>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Film festivals to submit to / financing opportunities
+        </div>
+        <div class="script-text">Great resource — and worth pairing with a harder question: what happens after the festival?
+
+The festival circuit can validate a film. It rarely solves the filmmaker's financial position. The distribution deal that follows often gives back less than the filmmaker expects.
+
+@IndikinOfficial is working on the infrastructure side of that equation — so festival success can actually translate into financial independence.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Extends their value to Indikin's territory naturally</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Filmmaker interviews / career advice / breaking into the industry
+        </div>
+        <div class="script-text">This is the conversation every filmmaker needs to have — and one that MovieMaker does better than anyone.
+
+The part that still goes unsaid: the business model you choose will determine whether the creative success translates into anything lasting.
+
+@IndikinOfficial is building tools specifically for independent filmmakers who want to own both sides of that equation — the creative and the financial.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Compliments their editorial voice · Bridges to Indikin mission</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Industry trends / streaming / studio news
+        </div>
+        <div class="script-text">MovieMaker has been covering this shift longer than anyone — the gap between creative success and financial independence for indie filmmakers keeps widening even as the "golden age of streaming" narrative fades.
+
+Worth asking: what does the next model look like?
+
+@IndikinOfficial thinks it looks like tokenized creator ownership on PulseChain. Happy to share what we're building if @moviemakermag is ever interested in covering creator-owned film finance.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-quote">Quote Post</span></div>
+          <div>Pitches editorial interest while being transparent about the ask</div>
+        </div>
+      </div>
+
+      <div class="strategy-note">
+        <strong>Engagement Strategy</strong>
+        MovieMaker is also a publication — which means there's a collab angle here beyond just replies. After 2–3 weeks of consistent quality engagement on their posts, reach out via DM to pitch a guest article or interview feature: "How blockchain is changing indie film finance." Their editorial focus on the business side of filmmaking makes this a genuine fit, not just a PR play.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ACCOUNT 3 ══════════════════════════ -->
+  <div class="account-block">
+    <div class="account-head">
+      <div class="account-index">03</div>
+      <div class="account-meta">
+        <div class="account-name">Filmmaker Magazine</div>
+        <div class="account-handle">
+          <a href="https://x.com/FilmmakerMag" target="_blank">x.com/FilmmakerMag</a>
+          <span class="pipe">|</span>
+          @FilmmakerMag
+          <span class="pipe">|</span>
+          IFP publication · Posted June 2025 · US in Progress coverage
+        </div>
+      </div>
+      <div class="account-stats-col">
+        <div class="follower-count">~80K</div>
+        <div class="follower-label">Followers</div>
+        <div class="activity-indicator"><div class="dot"></div>ACTIVE</div>
+      </div>
+    </div>
+    <div class="account-body">
+      <div class="why-box">
+        <span class="why-label">Why this account</span>
+        Filmmaker Magazine (IFP's quarterly publication) is one of the most respected voices in independent film. Their June 2025 post about US in Progress — a program specifically helping American indie films get post-production funding — shows they are actively covering the exact intersection of financing and indie film that Indikin operates in. Their audience is more industry-insider than casual film fan: producers, directors, and cinematographers actively working in the field.
+      </div>
+
+      <div class="scripts-header">
+        <span>Prepared Response Scripts — 3 scenarios</span>
+        <span>@FilmmakerMag</span>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Post-production funding / grants / finishing funds
+        </div>
+        <div class="script-text">Programs like US in Progress are vital — and they reveal something important: independent films still depend on institutions and gatekeepers to survive through post, even when the creative case is proven.
+
+The infrastructure that would let filmmakers fund post-production directly from their community doesn't fully exist yet.
+
+That's one of the problems @IndikinOfficial is trying to solve.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Directly relevant to the post type · Community funding angle</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Festival deadlines / submission opportunities
+        </div>
+        <div class="script-text">Submission seasons are a reminder of how much energy independent filmmakers spend chasing validation from institutions — when the real challenge is building sustainable economics around their work.
+
+@IndikinOfficial is working on the post-festival layer: what happens when the credits roll and the filmmaker needs to actually get paid and fund the next one.
+
+The Indikin ecosystem is built for that moment.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Speaks to their readership's actual daily concerns</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Industry news / IFP events / filmmaker resources
+        </div>
+        <div class="script-text">The IFP's work in supporting independent film infrastructure is exactly the right framing.
+
+What's missing is the financial infrastructure — tools that let independent filmmakers own the economics of their work the same way they own the creative vision.
+
+@IndikinOfficial is building that on PulseChain. Would love to connect with the Filmmaker Mag team about what's emerging in creator-owned film finance.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-quote">Quote Post</span></div>
+          <div>Positions Indikin alongside IFP's mission · Opens a door</div>
+        </div>
+      </div>
+
+      <div class="strategy-note">
+        <strong>Engagement Strategy</strong>
+        Filmmaker Magazine is connected to the IFP (Independent Film Project) — the organization behind the Gotham Awards and one of the most connected indie film institutions. Consistent engagement here positions @IndikinOfficial within serious indie film infrastructure conversations. The DM and collab angle (similar to MovieMaker) is highly worth pursuing after establishing a presence.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ACCOUNT 4 ══════════════════════════ -->
+  <div class="account-block">
+    <div class="account-head">
+      <div class="account-index">04</div>
+      <div class="account-meta">
+        <div class="account-name">Film Threat</div>
+        <div class="account-handle">
+          <a href="https://x.com/FilmThreat" target="_blank">x.com/FilmThreat</a>
+          <span class="pipe">|</span>
+          @FilmThreat
+          <span class="pipe">|</span>
+          43,000+ posts total · #SupportIndieFilm · Award This! contest
+        </div>
+      </div>
+      <div class="account-stats-col">
+        <div class="follower-count">~95K</div>
+        <div class="follower-label">Followers</div>
+        <div class="activity-indicator"><div class="dot"></div>VERY ACTIVE</div>
+      </div>
+    </div>
+    <div class="account-body">
+      <div class="why-box">
+        <span class="why-label">Why this account</span>
+        Film Threat has been the scrappy, anti-Hollywood voice in independent film since the 1980s — they've built a culture of championing indie films that get overlooked by the mainstream press. With 43,000+ posts and a signature hashtag (#SupportIndieFilm), they post constantly and their audience is specifically the type to care about creator economics and alternatives to Hollywood. Their "Award This!" contest also shows they're builder-minded. This is Indikin's tribal home base.
+      </div>
+
+      <div class="scripts-header">
+        <span>Prepared Response Scripts — 3 scenarios</span>
+        <span>@FilmThreat</span>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          #SupportIndieFilm / promoting an overlooked indie
+        </div>
+        <div class="script-text">Supporting indie film as a cultural act matters. The missing piece is supporting it as an economic act too.
+
+Liking and sharing creates awareness. Owning a stake in the financial ecosystem around independent cinema creates something that lasts.
+
+@IndikinOfficial is building that ecosystem. #SupportIndieFilm</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Uses their own hashtag · Extends their mission into economic territory</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Hollywood vs. indie film / mainstream vs. independent culture
+        </div>
+        <div class="script-text">Film Threat has been making this argument since before most people in indie film were born.
+
+The cultural case has always been solid. The economic infrastructure to back it up is the part that's still being built.
+
+@IndikinOfficial is working on exactly that — creator-owned film finance and distribution so the economic power finally matches the creative conviction.
+
+The threat to Hollywood is finally real.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>References their brand identity · "The threat is real" ties to their name</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Their Award This! contest / indie film submissions
+        </div>
+        <div class="script-text">Award This! is one of the best things in indie film — it does what film culture is supposed to do: surface the work that the market ignores.
+
+Worth thinking about pairing it someday with an economic component: what if winning also came with access to a distribution ecosystem?
+
+@IndikinOfficial and Indiflix are building that side of things. The recognition and the revenue path don't have to be separate conversations.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-quote">Quote Post</span></div>
+          <div>Compliments their contest · Plants a collab seed for Indikin × Film Threat</div>
+        </div>
+      </div>
+
+      <div class="strategy-note">
+        <strong>Engagement Strategy</strong>
+        Film Threat's identity is built on being the anti-establishment voice in film — which aligns perfectly with Indikin's mission. Don't be shy about being direct here: their audience will respond to honest, scrappy takes about the film industry more than polished corporate messaging. Also strong collab opportunity: sponsoring or co-promoting "Award This!" with a $INDIKIN prize component would put Indikin in front of exactly the right audience.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ACCOUNT 5 ══════════════════════════ -->
+  <div class="account-block">
+    <div class="account-head">
+      <div class="account-index">05</div>
+      <div class="account-meta">
+        <div class="account-name">Ted Hope</div>
+        <div class="account-handle">
+          <a href="https://x.com/tedhopeproducer" target="_blank">x.com/tedhopeproducer</a>
+          <span class="pipe">|</span>
+          @tedhopeproducer
+          <span class="pipe">|</span>
+          Legendary indie producer · 20+ years championing indie film business models
+        </div>
+      </div>
+      <div class="account-stats-col">
+        <div class="follower-count">~55K</div>
+        <div class="follower-label">Followers</div>
+        <div class="activity-indicator"><div class="dot"></div>HIGHLY ENGAGED</div>
+      </div>
+    </div>
+    <div class="account-body">
+      <div class="why-box">
+        <span class="why-label">Why this account</span>
+        Ted Hope is the most respected and intellectually active producer in independent film — he's been publicly writing and speaking about the business of indie film for over 20 years. His X account is consistently engaged and his followers include working filmmakers, distributors, and industry insiders who actually shape how indie film gets made and sold. A thoughtful reply on a Hope post that he engages with is worth more than 100 replies on a passive account. He posts about filmmaker economics constantly — it is literally his subject.
+      </div>
+
+      <div class="scripts-header">
+        <span>Prepared Response Scripts — 3 scenarios</span>
+        <span>@tedhopeproducer</span>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          The state of indie film / filmmaker sustainability / industry critique
+        </div>
+        <div class="script-text">Ted has been asking the right questions about this for longer than most people working in indie film today have been paying attention.
+
+The answer is starting to appear in unexpected places. PulseChain-based creator economics, tokenized filmmaker indexes, community-owned distribution platforms — it's early and messy, but the infrastructure is being built.
+
+@IndikinOfficial is one of the people building it. Would love your perspective on whether DeFi-based models can solve what traditional indie finance can't.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Invites dialogue · Positions Indikin as a potential answer to his questions</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          New models for film financing / alternatives to studio systems
+        </div>
+        <div class="script-text">The alternative models conversation has been happening for years — and the problem is always the same: the alternatives that exist still require filmmakers to give something up (equity, creative control, upside).
+
+The model @IndikinOfficial is building on PulseChain tries to flip that: community holds $INDIKIN, filmmakers get access to infrastructure and distribution through Indiflix, token holders share in the economics.
+
+Genuinely curious if you think the DeFi angle is viable here or if there are structural problems I'm not seeing.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-reply">Reply</span></div>
+          <div>Treats Ted as a peer and expert · Invites genuine intellectual exchange</div>
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-trigger">
+          <span class="trigger-tag">IF THEY POST ABOUT</span>
+          Filmmaker rights / industry fairness / creator compensation
+        </div>
+        <div class="script-text">This is the conversation @IndikinOfficial was built for.
+
+The problem Ted is describing — filmmaker labor being separated from filmmaker ownership — is a structural one. It won't be fixed by better contracts. It needs a different financial architecture.
+
+Tokenized creator ownership on a chain like PulseChain is one serious attempt at that architecture. Still early. But the direction is right.</div>
+        <div class="script-footer">
+          <div><span class="type-badge badge-quote">Quote Post</span></div>
+          <div>Aligns Indikin with Hope's framing · Serious, credible tone for a serious audience</div>
+        </div>
+      </div>
+
+      <div class="strategy-note">
+        <strong>Engagement Strategy</strong>
+        Ted Hope's followers are industry insiders — the tone with this account must be smart and substantive, never promotional. Think of engaging Ted's posts as a chance to be taken seriously by the indie film establishment, not to convert fans. If Ted himself engages with a reply, that's a career-defining moment for @IndikinOfficial's credibility in the industry. Treat every reply here like a short essay, not a social post. Quality over volume.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="brand">@INDIKINOFFICIAL</div>
+  <div>ACTIVE ACCOUNTS PLAYBOOK — VOL. 2 — ALL ACCOUNTS VERIFIED POSTING IN 2025</div>
+  <div>Combined reach ~600K+</div>
+</footer>
+
+</body>
+</html>
