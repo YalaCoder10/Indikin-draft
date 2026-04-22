@@ -1,6 +1,6 @@
-# Product Evolution (.product)
+# Indikin Product Development (7)
 
-This domain serves as the incubator for Indikin's upcoming product features and AI-powered creator tools.
+This folder serves as the incubator for Indikin's upcoming product features and AI-powered creator tools.
 
 ## Roadmap & Innovation
 Currently focusing on Phase 1 "Foundational Tooling" for filmmakers:
@@ -14,4 +14,4 @@ This directory is currently a placeholder for technical specifications and desig
 
 ---
 > [!NOTE]
-> For core platform architecture, refer to the [.brand/](../.brand/) domain.
+> For core platform architecture, refer to the [6- technical-development/](../6-%20technical-development/) folder.

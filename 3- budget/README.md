@@ -1,4 +1,4 @@
-# AI Implementation Budget (.budget)
+# Indikin AI Implementation Budget (3)
 
 Purpose: Draft, review, and finalize Indikin's AI implementation budget and financial modeling.
 
@@ -23,4 +23,4 @@ Indikin operates under three potential postures:
 
 ---
 > [!IMPORTANT]
-> Include AI-specific costs only. General business overhead is managed in the [.brain/tokenomics/](../.brain/tokenomics/INDIKIN_Financial_Projections.md) projections.
+> Include AI-specific costs only. General business overhead is managed in the [2- business-development/](../2-%20business-development/INDIKIN_Financial_Projections.md) projections.

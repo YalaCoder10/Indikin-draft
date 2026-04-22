@@ -6,28 +6,28 @@ Welcome to the central documentation and strategic planning repository for the I
 > [!IMPORTANT]
 > **Migration & Scale Round**: Indikin is currently transitioning from its initial deployment on PulseChain (V1) to a high-liquidity, Ethereum-native infrastructure. This documentation reflects the strategic migration, token bonding models, and the "Agentic Organization" scaling plan for 2026.
 
-## The Three Domains of Knowledge
+## Repository Structure
 
-This repository is architected for **AI-ready ingestion** and structured team collaboration across three primary domains:
+### 📁 [1- pitch-decks](./1-%20pitch-decks/)
+Fundraising assets including the Ethereum Seed Deck and Filmmaker value props.
 
-### 📁 `.brand/` (Engineering & Design Canonical)
-The definitive guide for building and maintaining the Indikin platform infrastructure.
-- **[BRAND_IDENTITY.md](.brand/BRAND_IDENTITY.md)**: Mission, vision, core assets, and legal copy.
-- **[DESIGN_SYSTEM.md](.brand/DESIGN_SYSTEM.md)**: CSS tokens, Tailwind aliases, and UI components.
-- **[ARCHITECTURE.md](.brand/ARCHITECTURE.md)**: System topology, Firestore schemas, and deployment config.
-- **[API_REFERENCE.md](.brand/API_REFERENCE.md)**: Detailed Cloudflare Worker API protocols.
+### 📁 [2- business-development](./2-%20business-development/)
+Core business logic, Acquisitions Map, Roadmap 2026, and Tokenomics modeling.
 
-### 📁 `.brain/` (Strategy & Business Intelligence)
-The core business logic, growth playbooks, and organizational infrastructure.
-- **Strategy**: Roadmap 2026, Acquisitions Map, and Business Plans.
-- **Tokenomics**: Ethereum bonding models and deflationary mechanics.
-- **Go-To-Market**: playbooks for Filmmakers, Fans, and Liquidity Providers.
-- **Team**: Founding team profiles (CEO, CTO, COO, AI Infra).
+### 📁 [3- budget](./3-%20budget/)
+AI implementation burn-rates, scenario modeling (Lean/Base/Aggressive), and governance KPIs.
 
-### 📁 `.budget/` (Finance & AI Operations)
-Focused modeling for Indikin's operational burn and AI implementation costs.
-- **Modeling**: Lean vs. Base vs. Aggressive scenario modeling.
-- **Governance**: KPI dashboards and hardware/staffing assumptions.
+### 📁 [4- go-to-market](./4-%20go-to-market/)
+Growth playbooks for Filmmakers, Fans, Liquidity Providers, and Streaming Consumers.
+
+### 📁 [5- team](./5-%20team/)
+Founding team infrastructure and profiles.
+
+### 📁 [6- technical-development](./6-%20technical-development/)
+Technical foundation, Architecture, API protocols, and Design System tokens.
+
+### 📁 [7- product-development](./7-%20product-development/)
+Product roadmap and innovation lab for AI creator tools.
 
 ---
 
@@ -35,7 +35,7 @@ Focused modeling for Indikin's operational burn and AI implementation costs.
 Indikin scales through infrastructure, not headcount. The platform is supported by an autonomous **AI Agent Suite**:
 - **INDEXA** (Index Manager), **FUNDA** (Production Fund), **MODRA** (Content Moderator), **COMA** (Community), **MARKA** (Marketing), **DEVA** (Developer), **ONBA** (Onboarding), and **ANALYXA** (Analytics).
 
-For more details on agent logic, refer to [.brand/ARCHITECTURE.md](.brand/ARCHITECTURE.md).
+For more details on agent logic, refer to [6- technical-development/ARCHITECTURE.md](./6-%20technical-development/ARCHITECTURE.md).
 
 ---
 *Note: This is a living draft. Always ensure you are building against the latest specifications defined in these core directories.*

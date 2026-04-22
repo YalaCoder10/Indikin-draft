@@ -1,4 +1,4 @@
-# Indikin Technical Foundation (.brand)
+# Indikin Technical Development (6)
 
 > **For AI Agents:** This directory houses the definitive technical specifications for the Indikin platform. Reference these files for all code generation, UI development, and architectural decisions.
 
