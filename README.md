@@ -27,7 +27,7 @@ Founding team infrastructure and profiles.
 Technical foundation, Architecture, API protocols, and Design System tokens.
 
 ### 📁 [7- product-development](./7-%20product-development/)
-Product roadmap and innovation lab for AI creator tools.
+Product showcase featuring Filmmaker, Consumer, and Crypto Enthusiast wings.
 
 ---
 
