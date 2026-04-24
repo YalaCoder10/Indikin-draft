@@ -6,6 +6,18 @@ Welcome to the central documentation and strategic planning repository for the I
 > [!IMPORTANT]
 > **Migration & Scale Round**: Indikin is currently transitioning from its initial deployment on PulseChain (V1) to a high-liquidity, Ethereum-native infrastructure. This documentation reflects the strategic migration, token bonding models, and the "Agentic Organization" scaling plan for 2026.
 
+## Ecosystem Pillars
+
+| Domain | Folder | Responsibility |
+| :--- | :--- | :--- |
+| **Strategy** | `1- pitch-decks` | Fundraising, Investor Relations, and High-level Vision. |
+| **Governance** | `2- business-dev` | Tokenomics, Roadmaps, and Strategic Acquisitions. |
+| **Economics** | `3- budget` | AI Resource Modeling, Burn-rates, and Financial KPIs. |
+| **Growth** | `4- go-to-market` | Segmented Playbooks for Filmmakers, Fans, and LPs. |
+| **Structure** | `5- team` | Core Personnel and Organizational Infrastructure. |
+| **Foundation** | `6- technical-dev` | Architecture, API protocols, and Design Systems. |
+| **Product** | `7- product-dev` | High-fidelity User Experience & Feature Showcase. |
+
 ## Repository Structure
 
 ### 📁 [1- pitch-decks](./1-%20pitch-decks/)
