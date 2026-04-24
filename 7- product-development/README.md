@@ -15,8 +15,8 @@ Explore the creator's journey: from AI-powered script brainstorming and automate
 See how the audience interacts: social "Co-Creator" profiles, direct support for filmmakers, multi-rail checkout systems, and progressive membership stages.
 
 ### 📁 [03-crypto-enthusiast-perspective](./03-crypto-enthusiast-perspective/)
-**Growth through Deflationary Economics.**
-Analyze the tokenomic engine: the 777B $INDIKIN index, deflationary burn mechanics, and the hardcoded 50% ecosystem discount utility.
+**Growth through Institutional Economics.**
+Analyze the **Ethereum V2** tokenomic model: the 10M $INDIKIN supply, pre-committed tax escalation, and the yield-centric migration from the PulseChain V1 prototype.
 
 ---
 

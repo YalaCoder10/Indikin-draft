@@ -39,7 +39,7 @@ Founding team infrastructure and profiles.
 Technical foundation, Architecture, API protocols, and Design System tokens.
 
 ### 📁 [7- product-development](./7-%20product-development/)
-Product showcase featuring Filmmaker, Consumer, and Crypto Enthusiast wings.
+Product showcase featuring the V1 Prototype (PulseChain) and the V2 Roadmap (Ethereum).
 
 ---
 

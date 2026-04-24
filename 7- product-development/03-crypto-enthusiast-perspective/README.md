@@ -1,24 +1,30 @@
-# Indikin Crypto Perspective
+# Indikin Crypto Perspective: V1 Prototype vs. V2 Mainnet
 
-The Indikin ecosystem is fueled by a sophisticated tokenomic engine designed for long-term sustainability and immediate utility. This perspective highlights the deflationary mechanics and the economic value proposition of the $INDIKIN index.
+The Indikin ecosystem is transitioning from a high-supply community prototype to an institutional-grade, yield-centric index. This perspective bridges the visual mechanics of the V1 deployment with the rigorous economic architecture of the V2 Ethereum migration.
 
-## Ecosystem Economics Gallery
+## The Evolution of $INDIKIN
 
-### 01. The $INDIKIN Index
+### V1 Prototype (PulseChain)
 ![Index Dashboard](./01-Index-and-Filmmaker-Token-Dashboard.png)
-$INDIKIN serves as the foundational index for the independent film market.
-- **Total Supply**: 777 Billion $INDIKIN.
-- **Reflection**: 1% PLSX rewards on every swap.
-- **Deflationary Burn**: 0.1% of the supply is burned for every new filmmaker onboarded.
-- **Current Status**: Live on PulseChain (PRC-20), with an upcoming migration to Ethereum (ERC-20).
+The initial deployment on PulseChain served as a proof-of-concept for the "Index" interface and the "Filmmaker Token" economy. 
+- **Legacy Metrics**: 777 Billion supply, 1% PLSX reflections, and 0.1% burn-per-onboarding.
+- **Utility Proof**: Demonstrated the **50% Discount** mechanic for ecosystem token holders.
 
-### 02. The 50% Utility Engine
+### V2 Mainnet Roadmap (Ethereum)
+The modernized Indikin economy (see [Business Development](../../2-%20business-development/INDIKIN_Tokenomics_Conservative.md)) is designed for institutional liquidity and sustainable yield.
+
+- **Total Supply**: 10,000,000 $INDIKIN (Tight circulating supply of 1M).
+- **Yield Mechanic**: Real, volume-backed yield distributed in **UNI** to circulating holders.
+- **Tax Escalation**: Pre-committed annual tax increase (1% → 2% → 3%) to structurally improve holder APY.
+- **Treasury Strategy**: 85% of supply is permanently locked and **excluded from rewards**, concentrating yield to active participants.
+
+## The Utility Engine
 ![Ecosystem Discount](./02-Ecosystem-Token-Discount-Activation.png)
-The primary utility of the ecosystem tokens is the **50% Platform Discount**. Users paying with $INDIKIN or any Filmmaker Token (e.g., $GDAY, $SCOOT) receive an immediate 50% reduction in the cost of content and membership passes.
+While the V1 prototype featured a hardcoded 50% discount, the **V2 Mainnet** leverages the $INDIKIN token as the governance and yield entry-point for the **9 Million Token Production Fund**. 
 
-## The Bridge to Ethereum
-As part of the 2026 Strategic Roadmap, Indikin is transitioning to an Ethereum-native infrastructure to access deeper liquidity and a broader investor base. The current PulseChain implementation serves as the proving ground for these mechanics, which will be fully bridged to the ETH L1/L2 ecosystem.
+- **Index exposure**: Holding $INDIKIN provides diversified exposure to the entire Film3 creator economy.
+- **Governance**: Holders control the release of filmmaker grants from the Production Fund.
 
 ---
 > [!IMPORTANT]
-> For a deep dive into the financial modeling and budget for these implementations, refer to the [Budget domain](../../3-%20budget/README.md).
+> The screenshots in this wing demonstrate the **User Interface (UI/UX)** functionality. For the current, binding financial specifications, always refer to the [Tokenomics Brief](../../2-%20business-development/INDIKIN_Tokenomics_Brief.md).
